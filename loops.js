@@ -1,5 +1,7 @@
 // Loops
 
+const { type } = require("os")
+
 /* 
     * Allow us to go over a block of code a determined amount of cycles. It's important to note that it is possible for us to write code without declaring an endpoint.
 
@@ -89,9 +91,35 @@ do {
 // Fizzbuzz Challenge
 
 /* 
-    Create an arrow function expression called fizzBuzz that takes one parameter. This parameter will an amount of numbers that a loop within a function will iterate over. In the loop, have a condition that checks if:
+    Create an arrow function expression called fizzBuzz that takes one parameter. This parameter will take an amount of numbers that a loop within a function will iterate over. In the loop, have a condition that checks if:
     * a number is divisible by 3, print "Fizz"
     * a number is divisible by 5, print "Buzz"
     * a number is divisible by 3 & 5, print "FizzBuzz"
     * else print "Actual number is not divisible by 3, 5, nor both."
 */
+
+// import { stdin, stdout} from "node:process"
+let fizzBuzz = number => {
+
+    if (!isNaN(number)) {
+        // checks if number argument is a number data type
+        for (let i = 0; i <= number; i++) {
+            if (i % 15 === 0) {
+                console.log("FizzBuzz")
+            } else if (i % 3 === 0) {
+                console.log("Fizz")
+            } else if (i % 5 === 0) {
+                console.log("Buzz")
+            } else {
+                console.log(`${i} is not divisible by 3 nor 5`)
+            }
+        }
+    } else {
+        console.log("Try again with a number!")
+    }
+    
+}
+
+// fizzBuzz(100)
+process.stdin.on("data", fizzBuzz) // Inputs data from outside of node into our fizzbuz
+
