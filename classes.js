@@ -212,3 +212,133 @@ class CircleStaticFactoryFx {
 
 let diaCircle = CircleStaticFactoryFx.createCircleUsingDia(20)
 console.log(diaCircle)
+
+// Inheritance
+// Extends
+
+/* 
+    Extends creates a class that is a child of another (parent) class.
+*/
+
+// class Car {
+//     constructor(make, model, year, transmission) {
+//         this.make = make
+//         this.model = model
+//         this.year = year
+//         this.transmission = transmission
+//     }
+
+//     greetCar() {
+//         return `Welcome to your ${this.year} ${this.make} ${this.model}`
+//     }
+
+//     greetDriver(driver) {
+//         return `Hello, ${driver}, your ${this.make} is looking sick!`
+//     }
+
+//     modifyMake(make) {
+//         this.make = make
+//     }
+// }
+
+class Options extends Car {
+    // constructor needs parameters to be inherited from the parent class
+    constructor(
+        make,
+        model,
+        year,
+        transmission,
+        hasLeather,
+        hasComfortAccess,
+        hasSportPackage
+    ) {
+        // allows access to properties and methods of parent class
+        super(make, model, year, transmission)
+        this.hasLeather = hasLeather
+        this.hasComfortAccess = hasComfortAccess
+        this.hasSportPackage = hasSportPackage
+    }
+
+    isCPO(currentYear) {
+        let result = currentYear - this.year
+        return result >= 6
+            ? `Your ${this.model} is out of warranty`
+            : "Your warranty is still active"
+    }
+}
+
+let porsche911 = new Options("Porsche", "911", 2017, "PDK", true, true, false)
+
+console.log(porsche911.isCPO(2025))
+
+// Challenge
+
+/* 
+    Extend the House class with one called ASale
+    Sale should have properties:
+        appraisalValue (int)
+        listPrice(int)
+        agent(str)
+        isListed(bool)
+    Create a method which calculates the difference between appraisalValue and the listPrice
+    Add condition that will check if list is 20% higher than appraisal.
+        If true, not worth it
+        If false, say good deal
+        The return should also include the difference between the two values
+
+*/
+
+class Sale extends House {
+    constructor(
+        address,
+        bedrooms,
+        bathrooms,
+        appraisalValue,
+        listPrice,
+        agent,
+        isListed
+    ) {
+        super(address, bedrooms, bathrooms)
+        this.appraisalValue = appraisalValue
+        this.listPrice = listPrice
+        this.agent = agent
+        this.isListed = isListed
+    }
+
+    decisionMaker() {
+        let difference = 1.2 * this.appraisalValue
+        let pricedDifference = this.listPrice - this.appraisalValue
+        return this.listPrice > difference
+            ? `Not worth it. List price is ${pricedDifference} more than appraisal`
+            : `Worth looking at. List price is only ${pricedDifference} more than appraisal`
+    }
+}
+
+let myHouse = new Sale("430 N Park Ave", 1, 1, 290000, 310000, "Tom Stemlar", false)
+
+console.log(myHouse.decisionMaker())
+
+class DateFormatter extends Date {
+    getFormattedDate() {
+        const months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        ]
+        return `${this.getDate()} - ${months[this.getMonth()]} - ${this.getFullYear()}`
+    }
+}
+
+console.log(new DateFormatter("June 17, 2022").getFormattedDate())
+
+
+
