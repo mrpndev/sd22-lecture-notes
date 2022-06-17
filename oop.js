@@ -52,3 +52,7 @@ function showArea(shape) {
 }
 
 showArea(shape)
+
+// Polymorphism
+
+// Data shares the same shape (Ex: two extended classes share one parent class)
